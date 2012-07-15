@@ -21,8 +21,6 @@ class ToDo
 end
 
 
-
-
 get '/' do 
 	erb :add
 end
