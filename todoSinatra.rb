@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'sinatra'
 require 'csv'
+require 'sinatra/activerecord'
+set :database, 'sqlite:///todo.db'
 
 class ToDo 
  	def add_task(task_description)
