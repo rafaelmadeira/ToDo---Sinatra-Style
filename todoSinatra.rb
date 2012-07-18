@@ -14,13 +14,10 @@ end
 
 get '/add' do
 	erb :add
-#	added_task = AddedTask.find(params[:add])
-#	@addedtasks = Added_Task.all
 end
 
 post '/add' do
 	@task = AddedTask.create(:task => "#{params[:tasks]}")
-
 	erb :add
 end
 
