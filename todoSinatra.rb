@@ -4,24 +4,9 @@ require 'csv'
 require 'sinatra/activerecord'
 set :database, 'sqlite:///todo.db'
 
-class ToDo 
- 	def add_task(task_description)
- 			CSV.open("todo.csv", "ab") do |csv|
- 			csv << [task_description]
- 		end
- 	end
-
- 	def complete_task(task_description)
-		tasks_array = CSV.read('todo.csv')
-		tasks_array.delete_if do |key, value| 
-			key == task_description
-		end
-		CSV.open("todo.csv", "wb") do |csv|
-			tasks_array.each { |i| csv << i }
-		end	
- 	end
+class AddedTask < ActiveRecord::Base
+	attr_accessible :task
 end
-
 
 get '/' do 
 	erb :add
@@ -29,11 +14,13 @@ end
 
 get '/add' do
 	erb :add
+#	added_task = AddedTask.find(params[:add])
+#	@addedtasks = Added_Task.all
 end
 
 post '/add' do
-	task_description = params[:task]
-	ToDo.new.add_task(params[:task])
+	@task = AddedTask.create(:task => "#{params[:tasks]}")
+
 	erb :add
 end
 
@@ -43,6 +30,6 @@ end
 
 post '/completed' do
 	task_description = params[:task]
-	ToDo.new.complete_task(params[:task])
+	AddedTask.delete("#{params[:task]}")
 	erb :completed		
 end

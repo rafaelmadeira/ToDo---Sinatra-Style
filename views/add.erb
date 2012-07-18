@@ -1,16 +1,22 @@
 <a href="/add">Add a Task  </a>&nbsp; | &nbsp;<a href="/completed">   Complete a Task</a>
 <h1>Add a task</h1>
+<h3>Enter a new task to add to the list</h3>
 <form action="/add" method="post">  
 <!--  <input type="text" name="status">   -->
  
  
-  <input type="text" name="task">  
+  <input type="text" name="tasks">  
   <input type="submit">  
 </form> 
 
-<h1> Here's what you have left on your todo list...</h1>
-		<ul>
-			<% CSV.foreach("todo.csv") do |row| %>
-				<li><%= row[0] %></li>
-			<% end %>
-		</ul>
+
+
+ 
+ <h1> Here's what you have left on your todo list...</h1>  
+ <ul id="list_of_tasks">
+    <% AddedTask.all.each do |c| %>
+    	<li>
+       		<%= c.task  %>
+    	</li>
+    	<% end %>
+</ul>
