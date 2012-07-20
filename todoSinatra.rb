@@ -17,7 +17,7 @@ get '/add' do
 end
 
 post '/add' do
-	@task = AddedTask.create(:task => "#{params[:tasks]}")
+	AddedTask.create(:task => params[:tasks])
 	erb :add
 end
 
@@ -25,8 +25,7 @@ get '/completed' do
 	erb :completed
 end
 
-post '/completed' do
-	task_description = params[:task]
-	AddedTask.delete("#{params[:task]}")
-	erb :completed		
+post "/completed/tasks/:id" do
+	AddedTask.delete(params[:id])
+	erb :completed
 end
