@@ -25,7 +25,7 @@ get '/completed' do
 	erb :completed
 end
 
-post "/completed/tasks/:id" do
+delete "/completed/tasks/:id" do
 	AddedTask.delete(params[:id])
 	erb :completed
 end
