@@ -7,7 +7,6 @@
     <% AddedTask.all.each do |c| %>
     	<li>
     		<form action="/completed/tasks/<%=c.id%>" method="post"> 
-    		<input type="hidden" name="task" value= c.id>  
     			<input type="submit" value="complete">
        		<%= c.id %> &nbsp; <%= c.task %>
        		</form>
